@@ -5,6 +5,9 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
+from shopping.views import CategoryListView, CategoryView
+from shopping_cart.views import CartListView, CartUpdateView
+
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
@@ -16,6 +19,10 @@ urlpatterns = [
     path("users/", include("ecommerce.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    path("category/<slug:slug>/", CategoryView.as_view(), name="category"),
+    path("categories/", CategoryListView.as_view(), name="items"),
+    path("cart/", CartListView.as_view(), name="cart"),
+    path("update-item/", CartUpdateView.as_view(), name="update_item"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

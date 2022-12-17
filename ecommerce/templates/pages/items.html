@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block dropdown %}
+
+
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <ul class="list-group">
+            <div class="row">
+            {% for category in category_list %}
+            <div class="col-3">
+            <li class="list-group-item text-center"><a href="{% url "category" category.slug %}">{{ category.name }}</a></li>
+            </div>
+            {% endfor %}
+            </div>
+          </ul>
+    </div>
+  </div>
+
+
+{% endblock dropdown %}
