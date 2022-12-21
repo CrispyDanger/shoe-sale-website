@@ -2,9 +2,21 @@
 
 {% block content %}
 
-{% for cart_item in cart_items %}
-<h2>{{ cart_item.name }}</h2>
-{% endfor %}
 
+
+<h1>Your Cart:</h1>
+<div class="conatiner">
+    <div class="col">
+    {% for cart_item in cart_items %}
+    <div class="row-6">
+        <div class="text-black">
+            {{ cart_item.product }}
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto update-cart" data-product={{ product.id }} data-action="remove" href="#">Remove</a></div>
+            <div class="text-black">Quantity:{{ cart_item.quantity }}</div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
 
 {% endblock content %}

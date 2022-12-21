@@ -13,7 +13,7 @@ class CartListView(View):
     def get(self, request):
         current_user = request.user
         cart = Cart.objects.get_or_create(user=current_user)[0]
-        cartItems = CartItem.objects.filter(cart=cart.id)
+        cartItems = CartItem.objects.filter(cart=cart)
 
         context = {
             "cart_items": cartItems,
@@ -35,7 +35,7 @@ class CartUpdateView(View):
 
         cart = Cart.objects.get_or_create(user=current_user)
 
-        cartItem = CartItem.objects.get_or_create(cart=cart.id, product=product)
+        cartItem = CartItem.objects.get_or_create(cart=cart[0], product=product)[0]
 
         if action == "add":
             cartItem.quantity += 1
