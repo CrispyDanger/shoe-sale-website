@@ -183,6 +183,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "ecommerce.users.context_processors.allauth_settings",
                 "shopping.context_processors.categories_fetcher",
+                "shopping_cart.context_processors.cart_items_fetch",
             ],
         },
     }

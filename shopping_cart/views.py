@@ -13,10 +13,12 @@ class CartListView(View):
     def get(self, request):
         current_user = request.user
         cart = Cart.objects.get_or_create(user=current_user)[0]
-        cartItems = CartItem.objects.filter(cart=cart)
+        cartItems = CartItem.objects.filter(cart=cart).order_by("product__name")
+        order_total = sum([(item.product.price * item.quantity) for item in cartItems])
 
         context = {
             "cart_items": cartItems,
+            "order_total": order_total,
         }
 
         return render(request, "pages/cart.html", context)
@@ -40,12 +42,14 @@ class CartUpdateView(View):
         if action == "add":
             cartItem.quantity += 1
         elif action == "remove":
+            cartItem.quantity = 0
+        elif action == "decrease":
             cartItem.quantity -= 1
 
         cartItem.save()
 
         if cartItem.quantity <= 0:
-            cartItem.quantity.delete()
+            cartItem.delete()
 
         return JsonResponse("Item was added to cart", safe=False)
 

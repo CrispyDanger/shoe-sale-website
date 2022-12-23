@@ -22,6 +22,7 @@ function updateUserOrder(productId, action){
 
     var url = '/update-item/'
 
+
     fetch(url, {
         method: "POST",
         headers:{
@@ -36,5 +37,6 @@ function updateUserOrder(productId, action){
     })
     .then((data) => {
         console.log("data:", data)
+        document.location.reload()
     })
 }

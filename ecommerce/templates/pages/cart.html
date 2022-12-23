@@ -2,21 +2,85 @@
 
 {% block content %}
 
+<section class="h-100 h-custom">
+    <div class="py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card">
+            <div class="card-body p-4">
+              <div class="row">
 
+                <div class="col-lg-7">
+                  <h2 class="mb-3"><a class="text-body"><i
+                        class="fas fa-long-arrow-alt-left me-2"></i>Shopping Cart</a></h2>
+                  <hr>
 
-<h1>Your Cart:</h1>
-<div class="conatiner">
-    <div class="col">
-    {% for cart_item in cart_items %}
-    <div class="row-6">
-        <div class="text-black">
-            {{ cart_item.product }}
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto update-cart" data-product={{ product.id }} data-action="remove" href="#">Remove</a></div>
-            <div class="text-black">Quantity:{{ cart_item.quantity }}</div>
-        </div>
-    </div>
-    {% endfor %}
-    </div>
-</div>
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                      <p class="mb-0">You have {{ cart_quantity }} items in your cart</p>
+                    </div>
+                    <div>
+                      <p class="mb-0"><span class="text-muted">Sort by:</span> <a
+                          class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
+                    </div>
+                  </div>
+                  {% for cart_item in cart_items %}
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                          <div>
+                            <img
+                              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                              class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                          </div>
+                          <div class="ms-3">
+                            <h5>{{ cart_item.product }}</h5>
+                            <p class="small mb-0"></p>
+                          </div>
+                        </div>
+                        <div class="d-inline-flex flex-row align-items-center">
+                          <div style="width: 40px;">
+                            <a class="fs-2 text-black update-cart" data-product={{ cart_item.product.id }} data-action="decrease" href="#">-</a>
+                          </div>
+                          <div style="width: 40px;">
+                            <h5 class="fw-normal mb-0">{{ cart_item.quantity }}</h5>
+                          </div>
+                            <div style="width: 40px;">
+                              <a class="fs-4 text-black update-cart" data-product={{ cart_item.product.id }} data-action="add" href="#">+</a>
+                            </div>
+                          <div style="width: 80px;">
+                            <h5 class="mb-0">${{ cart_item.total }}</h5>
+                          </div>
+                          <a class="btn btn-outline-dark update-cart" data-product={{ cart_item.product.id }} data-action="remove" href="#">Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Subtotal</p>
+                      <p class="mb-2">${{ order_total }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Shipping</p>
+                      <p class="mb-2">$20.00</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Total</p>
+                      <p class="mb-2">${{ order_total|add:"20" }}</p>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-dark btn-lg">
+                      <div>
+                        <a>Checkout</a>
+                      </div>
+                    </button>
+
+                </section>
 
 {% endblock content %}

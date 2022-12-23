@@ -6,19 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shopping', '0003_alter_product_price'),
+        ("shopping", "0003_alter_product_price"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='category',
-            name='slug',
+            model_name="category",
+            name="slug",
             field=models.SlugField(default=None),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
-            name='slug',
-            field=models.SlugField(default='temp'),
+            model_name="product",
+            name="slug",
+            field=models.SlugField(default="temp"),
         ),
     ]
